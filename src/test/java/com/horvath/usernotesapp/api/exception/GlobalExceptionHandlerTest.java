@@ -81,8 +81,8 @@ public class GlobalExceptionHandlerTest {
     void handleNoResourceFoundException_shouldReturnBadRequest() {
         NoResourceFoundException ex = new NoResourceFoundException(HttpMethod.GET, "/user/delete");
         ResponseEntity<ErrorResponse> response = handler.handleNoResourceFoundException(ex);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertTrue(Objects.requireNonNull(response.getBody()).getError().contains("Invalid request."));
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).getError().contains("The requested endpoint does not exist."));
     }
 
     @Test
