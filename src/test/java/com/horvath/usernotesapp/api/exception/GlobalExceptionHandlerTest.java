@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpInputMessage;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.Objects;
 import java.util.Set;
@@ -73,6 +75,14 @@ public class GlobalExceptionHandlerTest {
         ResponseEntity<ErrorResponse> response = handler.handleTypeMismatch(ex);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).getError().contains("userId"));
+    }
+
+    @Test
+    void handleNoResourceFoundException_shouldReturnBadRequest() {
+        NoResourceFoundException ex = new NoResourceFoundException(HttpMethod.GET, "/user/delete");
+        ResponseEntity<ErrorResponse> response = handler.handleNoResourceFoundException(ex);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).getError().contains("Invalid request."));
     }
 
     @Test
