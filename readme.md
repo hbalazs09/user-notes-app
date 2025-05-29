@@ -24,8 +24,8 @@ A Spring Boot application providing a REST API to manage users and their associa
 
 ### 1. **Clone the repository**
 ```bash
-git clone https://your-repo-url
-cd user-notes-api
+git clone https://github.com/hbalazs09/user-notes-app.git
+cd user-notes-app
 ```
 
 ### 2. **Build the application**
