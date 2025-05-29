@@ -14,13 +14,17 @@ A Spring Boot application providing a REST API to manage users and their associa
 - **H2 Database (in-memory)**
 - **Flyway** for database migrations
 - **Springdoc OpenAPI (Swagger UI)**
-- **JUnit 5** for unit testing
+- **JUnit 5** with **Mockito** for unit testing
 - **Maven** for build and dependency management
 
 ---
 
 
 ##  How to Build and Run
+
+Notes: 
+- _Maven_ is required to build and run the application.
+- If you just want to run the app locally, you can skip step _2_.
 
 ### 1. **Clone the repository**
 ```bash
@@ -57,7 +61,7 @@ Accessible at:
 ```
 http://localhost:8080/h2-console
 ```
-- JDBC URL: `jdbc:h2:mem:usernotesdb`
+- JDBC URL: `jdbc:h2:mem:user-notes-app`
 - User: `sa`
 - Password: *(leave blank)*
 
