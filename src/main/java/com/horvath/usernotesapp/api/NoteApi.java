@@ -64,9 +64,12 @@ public interface NoteApi {
     @Operation(summary = "Delete a note", description = "Soft deletes a note by its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Note deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Note not found"),
-            @ApiResponse(responseCode = "409", description = "Conflict during deletion"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "404", description = "Note not found",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "409", description = "Conflict during deletion",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @DeleteMapping("/{noteId}/delete")
     ResponseEntity<Void> deleteNote(@PathVariable Long noteId);
