@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(REQUIRED)
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id)
+        User user = userRepository.findById(id).filter(u -> !u.isDeleted())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         user.setDeleted(true);
         user.getNotes().forEach(note -> note.setDeleted(true));

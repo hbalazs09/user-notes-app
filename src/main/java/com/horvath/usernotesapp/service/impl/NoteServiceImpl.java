@@ -64,7 +64,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     @Transactional(REQUIRED)
     public void deleteNote(Long noteId) {
-        Note note = noteRepository.findById(noteId)
+        Note note = noteRepository.findById(noteId).filter(n -> !n.isDeleted())
                 .orElseThrow(() -> new EntityNotFoundException("Note not found"));
         note.setDeleted(true);
         noteRepository.save(note);
